@@ -46,6 +46,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.CenterAlignedTopAppBar
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,12 +70,18 @@ class MainActivity : ComponentActivity() {
  */
 @Composable
 fun WoofApp() {
-    LazyColumn() {
-        items(dogs) {
-            DogItem(
-                dog = it,
-                modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_small))
-            )
+    Scaffold(
+        topBar = {
+            WoofTopAppBar()
+        }
+    ) { it ->
+        LazyColumn(contentPadding = it) {
+            items(dogs) {
+                DogItem(
+                    dog = it,
+                    modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_small))
+                )
+            }
         }
     }
 }
@@ -167,4 +175,9 @@ fun WoofDarkThemePreview() {
     WoofTheme(darkTheme = true) {
         WoofApp()
     }
+}
+
+@Composable
+fun WoofTopAppBar(modifier: Modifier = Modifier) {
+
 }
